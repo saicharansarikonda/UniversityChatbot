@@ -25,16 +25,20 @@ class UniversityChatbot:
         """
         try:
             classification = self.classifier.classify(query)
-            department = classification.department
-            required_info = classification.required_info
 
+            if classification is None:
+                return ChatResponse(
+                    status="error",
+                    message="I'm sorry, I couldn't understand what department your query relates to. Could you please rephrase your question or provide more details?"
+                )
+
+            department = classification.department
             response = await self.department_agents[department].process_query(query)
 
             return ChatResponse(
                 department=department.value,
                 status="success",
-                response=response,
-                used_info=required_info
+                response=response
             )
 
         except Exception as e:

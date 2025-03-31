@@ -19,6 +19,7 @@ def handle_api_request(url):
 def register_all_tools():
     print("Registering all department tools...")
 
+    #CSE department tools
     tool_registry.register_tool(
         department=Department.CSE,
         name="cse_course_info",
@@ -31,6 +32,28 @@ def register_all_tools():
         name="cse_professor_info",
         func=handle_api_request,
         description=f"Get information about professors. Required: A full API URL like '{BASE_URL}/cse/professor?professor_name=Dr.%20Smith'."
+    )
+
+    # Admin department Tools
+    tool_registry.register_tool(
+        department=Department.ADMIN,
+        name="admin_academic_calendar",
+        func=handle_api_request,
+        description=f"Get academic calendar information. Required: A full API URL like '{BASE_URL}/admin/academic-calendar'."
+    )
+
+    tool_registry.register_tool(
+        department=Department.ADMIN,
+        name="admin_contacts",
+        func=handle_api_request,
+        description=f"Get administrative contact information. Required: A full API URL like '{BASE_URL}/admin/contacts?contact_type=registrar'."
+    )
+
+    tool_registry.register_tool(
+        department=Department.ADMIN,
+        name="admin_policies",
+        func=handle_api_request,
+        description=f"Get campus policy information. Required: A full API URL like '{BASE_URL}/admin/policies?policy_type=academic_integrity'."
     )
 
     print("Tool registration summary:")

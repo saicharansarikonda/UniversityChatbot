@@ -17,8 +17,6 @@ class ChatResponse(BaseModel):
     department: Optional[str] = Field(None, description="The department handling query")
     status: str = Field(...,description="Status of the response: success, need_more_info, error")
     response: Optional[str] = Field(None, description="Response from the chatbot")
-    required_info: Optional[Dict[str,str]] = Field(None, description="Information needed from the user")
-    used_info: Optional[Dict[str,Any]] = Field(None, description="Information used in the query")
     message: Optional[str] = Field(None, description="Error message if status is error")
 
 
