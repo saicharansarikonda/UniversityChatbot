@@ -23,9 +23,10 @@ class DepartmentAgent:
         self.llm = ChatOpenAI(api_key=OPENAI_API_KEY, model=LLM_MODEL,temperature=0.0)
         self.tools = tool_registry.get_tools(department)
         self.memory = ConversationBufferMemory(memory_key="chat_history",return_messages=True)
+        system_prompt = Department_Chatbot_Prompt.get(department.value)
 
         self.prompt = ChatPromptTemplate.from_messages([
-            ("system",Department_Chatbot_Prompt.format(department=department.value)),
+            ("system",system_prompt),
             ("human","{input}"),
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
