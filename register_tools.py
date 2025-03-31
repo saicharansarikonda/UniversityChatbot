@@ -56,6 +56,14 @@ def register_all_tools():
         description=f"Get campus policy information. Required: A full API URL like '{BASE_URL}/admin/policies?policy_type=academic_integrity'."
     )
 
+    # Finance Department Tools
+    tool_registry.register_tool(
+        department=Department.FINANCE,
+        name="finance_fee_info",
+        func=handle_api_request,
+        description=f"Get fee information. Provide optional semester. A full API URL like '{BASE_URL}/finance/fees?semester=Spring%202024'"
+    )
+
     print("Tool registration summary:")
     for dept, tools in tool_registry.tools.items():
         print(f"{dept.value}: {len(tools)} tools registered")
