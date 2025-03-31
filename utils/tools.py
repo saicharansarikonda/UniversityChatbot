@@ -39,7 +39,6 @@ class ToolRegistry:
         :param department: department enum value
         :return: list of tools for the department
         """
-
         return self.tools[department]
 
 

@@ -1,3 +1,4 @@
+import register_tools
 import uvicorn
 from app.api import app
 

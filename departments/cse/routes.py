@@ -28,22 +28,3 @@ async def professor_info(professor_name:Optional[str]=None, department:Optional[
     :return: dictionary of professor information
     """
     return CSEService.get_professor_info(professor_name,department)
-
-
-def register_cse_tools():
-    tool_registry.register_tool(
-        department=Department.CSE,
-        name="cse_course_info",
-        func=lambda args:CSEService.get_course_info(**eval(args)),
-        description="Get information about a specific course. Required: course_code. Optional: semester."
-    )
-
-    tool_registry.register_tool(
-        department=Department.CSE,
-        name="cse_professor_info",
-        func=lambda args: CSEService.get_professor_info(**eval(args)),
-        description="Get information about professors. Optional: professor_name, department."
-    )
-
-
-register_cse_tools()

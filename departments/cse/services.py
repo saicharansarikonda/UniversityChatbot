@@ -11,6 +11,7 @@ class CSEService:
         :return: dictionary with course information
         """
 
+        print("course_code is ",course_code)
         return {
             "course_code":course_code,
             "name":f"Introduction to {course_code}",

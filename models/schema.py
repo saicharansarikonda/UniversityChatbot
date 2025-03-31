@@ -81,4 +81,4 @@ class ResumeReviewRequest(BaseModel):
 class QueryClassification(BaseModel):
     department: Department = Field(..., description="The university department that can handle this query")
     reason: str = Field(..., description="Reason for selecting this department")
-    required_info: Dict[str,Any] = Field(..., description="Information needed to fulfill the request")
+    required_info: Dict[str,Any] = Field(..., description="Information extracted from the query needed to fulfill the request. Extract all identifiable parameters like course_code, professor_name, student_id, etc. directly from the query.")

@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_openai_functions_agent
-from langchain.prompts import ChatPromptTemplate
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 
 from app.config import OPENAI_API_KEY, LLM_MODEL
@@ -20,13 +20,14 @@ class DepartmentAgent:
         """
 
         self.department = department
-        self.llm = ChatOpenAI(api_key=OPENAI_API_KEY, model=LLM_MODEL)
+        self.llm = ChatOpenAI(api_key=OPENAI_API_KEY, model=LLM_MODEL,temperature=0.0)
         self.tools = tool_registry.get_tools(department)
         self.memory = ConversationBufferMemory(memory_key="chat_history",return_messages=True)
 
         self.prompt = ChatPromptTemplate.from_messages([
             ("system",Department_Chatbot_Prompt.format(department=department.value)),
             ("human","{input}"),
+            MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
 
