@@ -64,10 +64,45 @@ def register_all_tools():
         description=f"Get fee information. Provide optional semester. A full API URL like '{BASE_URL}/finance/fees?semester=Spring%202024'"
     )
 
-    print("Tool registration summary:")
-    for dept, tools in tool_registry.tools.items():
-        print(f"{dept.value}: {len(tools)} tools registered")
-        for tool in tools:
-            print(f"  - {tool.name}")
+    #Library department tools
+    tool_registry.register_tool(
+        department=Department.LIBRARY,
+        name="library_book_info",
+        func=handle_api_request,
+        description=f"Get information about the library and books available. A full API URL like '{BASE_URL}/library/book?isbn=1234'"
+    )
+
+    #Sports department tools
+    tool_registry.register_tool(
+        department=Department.SPORTS,
+        name="sports_events_info",
+        func=handle_api_request,
+        description="""Get sports events and facilities information.
+            Construct the API URL following this pattern:
+            - Base URL: http://localhost:8000/sports/events
+            - NO parameters required
+            - Always use: '/sports/events'
+            Simply call the base URL to retrieve current sports events and facilities information."""
+    )
+
+    #Careers Services tools
+    tool_registry.register_tool(
+        department=Department.CAREER,
+        name="career_resources_info",
+        func=handle_api_request,
+        description="""Get career services and resources information.
+        BOTH parameters are REQUIRED:
+        - Base URL: /career/resources
+        - resource_type (REQUIRED): e.g., 'events', 'internships', 'resume_services'
+        - job_type (REQUIRED): e.g., 'internship', 'full-time', 'tech'
+        Example: '/career/resources?resource_type=events&job_type=tech'
+        BOTH parameters must be extracted from the query."""
+    )
+
+    # print("Tool registration summary:")
+    # for dept, tools in tool_registry.tools.items():
+    #     print(f"{dept.value}: {len(tools)} tools registered")
+    #     for tool in tools:
+    #         print(f"  - {tool.name}")
 
 register_all_tools()

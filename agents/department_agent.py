@@ -20,7 +20,7 @@ class DepartmentAgent:
         """
 
         self.department = department
-        self.llm = ChatOpenAI(api_key=OPENAI_API_KEY, model=LLM_MODEL,temperature=0.0)
+        self.llm = ChatOpenAI(api_key=OPENAI_API_KEY, model=LLM_MODEL,temperature=0.3)
         self.tools = tool_registry.get_tools(department)
         self.memory = ConversationBufferMemory(memory_key="chat_history",return_messages=True)
         system_prompt = Department_Chatbot_Prompt.get(department.value)

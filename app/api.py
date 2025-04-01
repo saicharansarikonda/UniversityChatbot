@@ -9,6 +9,9 @@ from agents.chatbot import chatbot
 from departments.cse import routes as cse_routes
 from departments.admin import routes as admin_routes
 from departments.finance import routes as finance_routes
+from departments.library import routes as library_routes
+from departments.sports import routes as sports_routes
+from departments.career import routes as career_routes
 
 app = FastAPI(
     title="University Chatbot API",
@@ -26,7 +29,9 @@ app.add_middleware(
 app.include_router(cse_routes.router)
 app.include_router(admin_routes.router)
 app.include_router(finance_routes.router)
-
+app.include_router(library_routes.router)
+app.include_router(sports_routes.router)
+app.include_router(career_routes.router)
 
 @app.post("/chat",response_model=ChatResponse)
 async def chat(request: ChatRequest):

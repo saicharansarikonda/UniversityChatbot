@@ -74,7 +74,6 @@ class ResumeReviewRequest(BaseModel):
 
 
 
-
 #Query Classifier Model
 class QueryClassification(BaseModel):
     department: Department = Field(..., description="The university department that can handle this query")
